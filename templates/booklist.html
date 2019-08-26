@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>book_list</title>
+</head>
+<body>
+<div>
+<table>
+    <tr>
+    <td>书籍名称</td>
+        <td>价格</td>
+        <td>出版日期</td>
+        <td>出版社</td>
+        <td>作者</td>
+        <td>操作</td>
+    </tr>
+    {% for book in book_list %}
+        <tr>
+    <td>{{ book.title }}</td>
+        <td>{{ book.price }}</td>
+        <td>{{ book.pub_date|date:"Y-m-d" }}</td>
+        <td>{{ book.public }}</td>
+        <td>{% for v2 in book.authors.all %}
+                {% if forloop.last %}
+                <span>{{ v2.name }}</span>
+                {% else %}
+               <span>{{ v2.name }}</span>,
+                {% endif %}
+            {% endfor %}</td>
+        <td><a href="/book1/bookdelete/{{ book.nid }}">删除</a><a href="/book1/bookupdate/{{ book.nid }}">修改</a></td>
+    </tr>
+
+
+    {% endfor %}
+
+
+
+</table>
+
+
+<a href="{% url 'book1:bookadd' %}">添加</a>
+</div>
+
+</body>
+</html>
